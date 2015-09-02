@@ -1,0 +1,27 @@
+{
+  "name": "maryannette",
+  "version": "0.0.1",
+  "description": "Practicing Marionette",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/groots/Mary-Annette.git"
+  },
+  "keywords": [
+    "Marionette",
+    "Backbone"
+  ],
+  "author": "George Roots",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/groots/Mary-Annette/issues"
+  },
+  "homepage": "https://github.com/groots/Mary-Annette#readme",
+  "dependencies": {
+    "bower": "^1.5.2",
+    "express": "^4.13.3"
+  }
+}
