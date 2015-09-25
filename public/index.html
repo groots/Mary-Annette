@@ -2,15 +2,12 @@
 <html>
 <head>
 	<title>Mary Annette</title>
-	<script src="scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<div id="app">
 		
 	</div>
 	<script id="index-template" type="text/x-backbonebone">
-
 		<header>
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -37,21 +34,44 @@
 	</script>
 
 	<script src="scripts/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
+
 	<script src="scripts/vendor/underscore/underscore-min.js"></script>
 	<script src="scripts/vendor/backbone/backbone-min.js"></script>
 	<script src="scripts/vendor/backbone.marionette/lib/backbone.marionette.min.js"></script>
 
 	<script>
+		//create Marionette application object to for UserAdmin
 		var UserAdmin = new Marionette.Application();
 
-		UserAdmin.addRegions({
-			mainRegion : "#app"
-		});
-		var IndexView = Marionette.ItemView.extend({
-			template : "#index-template"
+		//Marionette likes controllers, even if they aren't really controllers. This essentially
+		var AppController = Marionette.Controller.extend({
+			showIndex: function(){
+				//create index view and set template
+				var IndexView = Marionette.ItemView.extend({
+					template : "#index-template"
+				});
+				//show index view
+				UserAdmin.mainRegion.show(new IndexView());				
+			}
 		});
 
-		UserAdmin.mainRegion.show(new IndexView());
+		//create constructor for UserAdmin application object
+		UserAdmin.addInitializer(function(){
+			//create index/main region, assign to #app element
+			UserAdmin.addRegions({
+				mainRegion : "#app"
+			});
+
+			//Create instance of AppController and append it to the UserAdmin namespace
+			UserAdmin.AppController = new AppController();
+
+			//Call showIndex function to display content. This will be changed in the router at some point
+			UserAdmin.AppController.showIndex();
+		});
+		UserAdmin.start();
+
 	</script>
 </body>
 </html>
